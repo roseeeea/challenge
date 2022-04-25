@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+	int week;
+	int holiday[5]={1,4,2,3,0};  
+	int D[5]={1,1,1,1,1}; //還有禮拜五兩個下午 
+	int S[5]={0,1,0,1,0}; // 還有禮拜二早上3節 
+	
+	// 國文選文一四  表達二五  彈性四
+	// 英文聽講一三  寫作四五  思考五
+	
+	
+	
+	  
+	
+	
+	
+	return 0;
+}
