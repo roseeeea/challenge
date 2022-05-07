@@ -1,0 +1,75 @@
+#include<iostream>
+#include<cstdlib>
+#include<string>
+using namespace std;
+
+
+int main(){
+    string input;
+    
+    cout << "tiny game about sentence <3" << endl;
+    cout << "1. reverse every letter " << endl;
+    cout << "2. show the number of consonant " << endl;
+    cout << "3. show radom letter in the sentence" << endl;
+    cout << "4. show the sentence with every o letter in upercase O"<< endl;
+    cout << "5. quit the game" << endl;
+    
+    cout << "enter the sentence:" << endl;
+    getline(cin,input);  //cin 遇到空白格就會終止 (cin>>input can not detect blank)
+    
+    while(1){
+        
+        int choice;
+        
+        cout << "choose the mode:" << endl;
+        cin >> choice;
+        
+        int L = input.length();
+        
+        if(choice == 1){
+            string reverse;
+            for(int i=L; i>=0; i--){
+                reverse.append(1, input[i]);
+            }
+            cout << reverse << endl;
+        }
+        else if(choice == 2){
+            int sum=0;
+            string consonant = "aeiou";
+            for(int i=0; i<L; i++){
+                for(int j=0; j<5; j++){
+                    if(input[i] == consonant[j]){
+                        sum +=1;
+                        break;
+                    }
+                }
+            }
+            cout << sum << endl;
+        }
+        else if(choice == 3){
+            srand(1);
+            
+            int x= rand();
+            int random = x%L;
+            cout << input[random] << endl;
+        }
+        else if(choice == 4){
+            string keep;
+            for(int i=0; i<input.length(); i++){
+                if(input[i]=='o'){
+                    keep.append("O");
+                }
+                else{
+                    keep.append(1, input[i]);
+                }
+            }
+            cout << keep << endl;
+        }
+        else if(choice == 5){
+            break;
+        }
+    }
+    
+    
+    return 0;
+}
