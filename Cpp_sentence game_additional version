@@ -1,0 +1,146 @@
+#include<iostream>
+#include<cstdlib>
+#include<string>
+using namespace std;
+ 
+// display the menu to the user
+// return user's choice
+int menu() {
+    int choice;
+    
+    cout << "tiny game about sentence <3" << endl;
+    cout << "1. reverse every letter " << endl;
+    cout << "2. show the number of consonant " << endl;
+    cout << "3. show radom letter in the sentence" << endl;
+    cout << "4. show the sentence with every o letter in upercase O"<< endl;
+    cout << "5. quit the game" << endl;
+    
+    cout << "choose the mode:" << endl;
+        try{  //*****
+            cin >> choice;
+                if(choice < 1 || choice > 5) {
+                        throw -1;  //*****
+                }
+        }
+        // if it's not a correct number
+        catch(int smth) {
+                cout << "Please enter a correct number..." << endl;
+                // flush stdin (input buffer)
+                // make it empty
+                cin.clear();
+                string buff;
+                getline(cin, buff);
+                return menu();
+        }
+        return choice;
+}
+ 
+
+
+// reverse the string and return it
+string reverse(string sentence) {
+    string reverse;
+    for(int i=sentence.length(); i>=0; i--){
+        reverse.append(1, sentence[i]);
+    }
+        return reverse;
+}
+ 
+
+
+// return the number of consonant
+// in the sentence
+int count_consonant(string sentence) {
+    int sum=0;
+    string consonant = "aeiou";
+    for(int i=0; i<sentence.length(); i++){
+        for(int j=0; j<5; j++){
+            if(sentence[i] == consonant[j]){
+                sum +=1;
+                break;
+            }
+        }
+    }
+        return sum;
+}
+
+
+ 
+// return a random number in range
+// of the sentence
+int get_random_char(string sentence) {
+            srand(time(NULL));
+            int x= rand();
+            int random = x%sentence.length();
+                        return random;
+}
+ 
+// return a string with all
+// 'o' to 'O'
+string o_to_O(string sentence) {
+    string keep;
+    for(int i=0; i<sentence.length(); i++){
+        if(sentence[i]=='o'){
+            keep.append("O");
+        }
+        else{
+            keep.append(1, sentence[i]);
+        }
+    }
+        return keep;
+}
+ 
+
+
+// ask the user for a sentence
+string getLine() {
+    // get sentence from user
+        cout << "Your sentence : ";
+        string sentence;
+        getline(cin, sentence);
+        // if line is empty
+        if(sentence == "") {
+                cout << "please not an empty string..." << endl;
+                return getLine();
+        }
+        return sentence;
+}
+ 
+
+int main(){
+ 
+        int choice = 0;
+        string sentence = getLine();
+ 
+    while(choice != 5) {
+                // display the menu
+                choice = menu();
+        
+                switch(choice) {
+                        case 1:
+                                cout << reverse(sentence) << endl;
+                                break;
+                        case 2:
+                    cout << "There is " << count_consonant(sentence) << " consonant(s)" << endl;
+                                break;
+                        case 3:
+                                { //if the code are too long it should be added {}
+                                int random = get_random_char(sentence);
+                    cout << "The char #" << random << " is : " << sentence[random] << endl;
+                                break;
+                                }
+                        case 4:
+                                {
+                                string keep = o_to_O(sentence);
+                    cout << keep << endl;
+                                break;
+                                }
+                        case 5:
+                            exit(0);
+                        //player choose 5 exit from switch, and can not enter the loop again
+                        default:
+                                cout << "not a right option..." << endl;
+                                break;
+                }
+    }
+}
